@@ -1,9 +1,26 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent (typeof(Rigidbody2D))]
 public class PlayerMovement : MonoBehaviour
 {
+    [Header("데이터(읽기 전용)")]
+    [SerializeField] private PlayerStats _playerStats;
+    [SerializeField] Animator _animator;
+    
+    static readonly int HashIsMove = Animator.StringToHash("IsMove");
+    
+    private Rigidbody2D _rigidbody2D;
+    private Vector2 direction;
+    
+    private void Awake()
+    {
+        _rigidbody2D = GetComponent<Rigidbody2D>();
+    }
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -13,6 +30,35 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        direction = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")).normalized;
         
     }
+
+    void FixedUpdate()
+    {
+        Vector2 targetVelocity =  direction * _playerStats.moveSpeed;
+        _rigidbody2D.velocity = targetVelocity;
+        
+        //가속, 감속 기능 추가
+        
+        float speedSq = _rigidbody2D.velocity.sqrMagnitude;
+        float startThresh = 0.01f; // 움직임 시작 판단
+        float stopThresh = 0.0005f; // 정지 시점 판단
+        
+        bool playerMove = speedSq > startThresh;
+        
+        if (!playerMove && _animator.GetBool(HashIsMove) && speedSq > stopThresh)
+            playerMove = true;
+
+        if (_animator && _animator.GetBool(HashIsMove) != playerMove)
+            _animator.SetBool(HashIsMove, playerMove);
+        
+    }
+
+    private void Movement(Vector2 direction)
+    {
+        
+    }
+    
+    
 }

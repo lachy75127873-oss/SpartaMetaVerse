@@ -10,14 +10,21 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private PlayerStats _playerStats;
     [SerializeField] Animator _animator;
     
+    private Rigidbody2D _rigidbody2D;
+    private SpriteRenderer _spriteRenderer;
+
     static readonly int HashIsMove = Animator.StringToHash("IsMove");
     
-    private Rigidbody2D _rigidbody2D;
+    float startThresh = 0.01f; // 움직임 시작 판단
+    float stopThresh = 0.0005f; // 정지 시점 판단
+    
     private Vector2 direction;
+    private bool directionChanged;
     
     private void Awake()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
+        _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
     }
 
 
@@ -31,19 +38,24 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         direction = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")).normalized;
+
+        if (MathF.Abs(direction.x) > 0)
+        {
+            directionChanged = !(direction.x > 0f);
+            _spriteRenderer.flipX = directionChanged;
+        }
         
     }
 
     void FixedUpdate()
     {
+        
         Vector2 targetVelocity =  direction * _playerStats.moveSpeed;
         _rigidbody2D.velocity = targetVelocity;
         
         //가속, 감속 기능 추가
         
         float speedSq = _rigidbody2D.velocity.sqrMagnitude;
-        float startThresh = 0.01f; // 움직임 시작 판단
-        float stopThresh = 0.0005f; // 정지 시점 판단
         
         bool playerMove = speedSq > startThresh;
         
@@ -52,11 +64,6 @@ public class PlayerMovement : MonoBehaviour
 
         if (_animator && _animator.GetBool(HashIsMove) != playerMove)
             _animator.SetBool(HashIsMove, playerMove);
-        
-    }
-
-    private void Movement(Vector2 direction)
-    {
         
     }
     

@@ -1323,7 +1323,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c387fc8fece5a460f9a99a8e4444bab9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  promptPanel: {fileID: 6217322825793176330, guid: c3cb1a40c3f5d40049d5180d6bb57849, type: 3}
+  promptPanel: {fileID: 729417712}
   interactKey: 102
   sceneToLoad: GameScene
 --- !u!1001 &675280389
@@ -1427,6 +1427,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c3cb1a40c3f5d40049d5180d6bb57849, type: 3}
+--- !u!1 &729417712 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6217322825793176330, guid: c3cb1a40c3f5d40049d5180d6bb57849, type: 3}
+  m_PrefabInstance: {fileID: 675280389}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &729417713 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 9189979191853161127, guid: c3cb1a40c3f5d40049d5180d6bb57849, type: 3}

@@ -27,7 +27,7 @@ public class InteractPrompt : MonoBehaviour
 
     private void Awake()
     {
-        promptPanel.SetActive(false);
+        if (promptPanel) promptPanel.SetActive(false);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -42,7 +42,7 @@ public class InteractPrompt : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if(!CompareTag("Player")) return;
+        if(!other.CompareTag("Player")) return;
         _inZone = false;
         if(promptPanel) promptPanel.SetActive(false);
     }
@@ -57,10 +57,11 @@ public class InteractPrompt : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(!_loading || !_inZone) return;
+        if(_loading || !_inZone) return;
 
         if (Input.GetKeyDown(interactKey))
         {
+            Debug.Log("Interact");
             _loading = true;
             SceneManager.LoadScene(sceneToLoad);
         }

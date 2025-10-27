@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Project/Scenes/Overworld.unity
     guid: 9e32aa7b01ce84f548bd9b4db84305e7
+  - enabled: 1
+    path: Assets/_Project/Scenes/LoadingScene.unity
+    guid: 4efbbdddc47e240eb93aeea0dfc0af58
   m_configObjects: {}

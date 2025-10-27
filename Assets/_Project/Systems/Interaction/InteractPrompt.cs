@@ -15,7 +15,7 @@ public class InteractPrompt : MonoBehaviour
     [SerializeField] private GameObject promptPanel; // 하단 안내 패널(프리팹 인스턴스 or 씬 오브젝트)
     [SerializeField] private KeyCode interactKey = KeyCode.F;
     [SerializeField] private string sceneToLoad = "GameScene";
-
+    
     private bool _inZone;
     private bool _loading;
 
@@ -63,7 +63,10 @@ public class InteractPrompt : MonoBehaviour
         {
             Debug.Log("Interact");
             _loading = true;
-            SceneManager.LoadScene(sceneToLoad);
+            
+            SceneRouter.NextSceneName = "MiniGame_Flapy";
+            
+            SceneManager.LoadScene("LoadingScene");
         }
         
         

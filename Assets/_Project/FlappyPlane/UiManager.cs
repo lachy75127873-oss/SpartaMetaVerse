@@ -2,25 +2,37 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class UiManager : MonoBehaviour
 {
     
     public TextMeshProUGUI scoreText;
-    public TextMeshProUGUI restartText;
-    
+    [SerializeField] public GameObject gameInfoPanel;
+    [SerializeField] public GameObject RestartText;
+    [SerializeField] private TextMeshProUGUI currentScoreText;
+    [SerializeField] private TextMeshProUGUI BestScoreText;
     void Start()
     {
-        if (restartText == null) Debug.Log("restartText is null");
+        if (gameInfoPanel == null) Debug.Log("gameInfoPanel is null");
         if (scoreText == null) Debug.Log("scoreText is null");
-        
-        restartText.gameObject.SetActive(false);
+        if (RestartText == null) Debug.Log("RestartText is null");
         
     }
 
-    public void SetRestart()
+    public void setCurrentScore(int score)
     {
-        restartText.gameObject.SetActive(true);
+        if(currentScoreText)  currentScoreText.text = score.ToString(); 
+    }
+
+    public void setBestScore(int score)
+    {
+        if(BestScoreText)  BestScoreText.text = score.ToString();
+    }
+
+    public void GetReady()
+    {
+        gameInfoPanel.gameObject.SetActive(true);
     }
 
     public void SetScore(int score)

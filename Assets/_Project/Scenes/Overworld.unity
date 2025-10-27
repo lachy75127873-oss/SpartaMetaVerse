@@ -1325,7 +1325,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   promptPanel: {fileID: 729417712}
   interactKey: 102
-  sceneToLoad: GameScene
+  sceneToLoad: MiniGame_Flapy
 --- !u!1001 &675280389
 PrefabInstance:
   m_ObjectHideFlags: 0

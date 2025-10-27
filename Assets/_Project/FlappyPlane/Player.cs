@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using _Project.FlappyPlane;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -15,13 +17,17 @@ public class Player : MonoBehaviour
     public bool isDead = false;
     float deathCooldown = 0f;
     
+    private Vector3 startPosition;
+    private Quaternion startRotation;
+    private float defaultGravity;
+    
     bool isFlap = false;
     
     public bool godMode = false;
-    
-    
-    void Start()
+
+    private void Awake()
     {
+
         gameManager = GameManager.instance;
 
         animator = GetComponentInChildren<Animator>();
@@ -30,11 +36,44 @@ public class Player : MonoBehaviour
         if (animator == null )Debug.Log("Not Founded Animator");
         if (_rigidbody == null) Debug.Log("Not Founded Rigidbody");
         
+        defaultGravity = _rigidbody.gravityScale;
+        startPosition = transform.position;
+        startRotation = transform.rotation;
     }
+
+
+    
+    void OnEnable()  { GameManager.OnStateChanged += HandleState; }
+    void OnDisable() { GameManager.OnStateChanged -= HandleState; }
+
+    void HandleState(GameState s)
+    {
+        switch (s)
+        {
+            case GameState.Ready:
+                _rigidbody.simulated = false;
+                _rigidbody.velocity = Vector2.zero;
+                transform.position = startPosition;
+                transform.rotation = startRotation;
+                isDead = false;
+                break;
+
+            case GameState.Playing:
+                _rigidbody.simulated = true;
+                _rigidbody.gravityScale = defaultGravity;
+                _rigidbody.velocity = Vector2.zero; 
+                break;
+
+            case GameState.GameOver:
+                break;
+        }
+    }
+
 
     // Update is called once per frame
     void Update()
     {
+        if (gameManager.currentGameState != GameState.Playing) return;
 
         if (isDead)
         {
@@ -42,7 +81,7 @@ public class Player : MonoBehaviour
             {
                 if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
                 {
-                   gameManager.Restart();
+                   gameManager.SetState(GameState.GameOver);
                 }
             }
             else
@@ -54,6 +93,7 @@ public class Player : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
             {
+                
                 isFlap = true;
             }
         }
@@ -62,6 +102,8 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (gameManager.currentGameState != GameState.Playing) return;
+
         if (isDead){return;}
         
         Vector3 velocity = _rigidbody.velocity;

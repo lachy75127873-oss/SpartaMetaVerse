@@ -619,7 +619,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 122e53ceae3124f3c8ad6289efc4a066, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loadingTime: 2
+  loadingTime: 1
 --- !u!4 &1913527314
 Transform:
   m_ObjectHideFlags: 0

@@ -46,13 +46,6 @@ public class InteractPrompt : MonoBehaviour
         _inZone = false;
         if(promptPanel) promptPanel.SetActive(false);
     }
-    
-
-    
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()
@@ -61,7 +54,6 @@ public class InteractPrompt : MonoBehaviour
 
         if (Input.GetKeyDown(interactKey))
         {
-            Debug.Log("Interact");
             _loading = true;
             
             SceneRouter.NextSceneName = "MiniGame_Flapy";

@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class LoadSceneManager : MonoBehaviour
 {
-    [SerializeField] private float loadingTime = 3.0f;
+    [SerializeField] private float loadingTime = 1.0f;
     
     private bool started;
     private string nextScene; 

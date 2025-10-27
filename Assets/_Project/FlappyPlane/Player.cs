@@ -87,6 +87,6 @@ public class Player : MonoBehaviour
         deathCooldown = 1f;
         
         animator.SetInteger("IsDie",1);
-        //gameManager.GameOver();
+        gameManager.GameOver();
     }
 }

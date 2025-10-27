@@ -38,7 +38,6 @@ namespace _Project.FlappyPlane
         public void AddScore(int score)
         {
             currentScore += score;
-            Debug.Log("Score"+currentScore);
             uiManager.SetScore(currentScore);
         }
     

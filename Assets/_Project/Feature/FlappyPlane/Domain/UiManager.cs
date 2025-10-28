@@ -24,6 +24,7 @@ public class UiManager : MonoBehaviour
 
     public void setCurrentScore(int score)
     {
+        
         if(currentScoreText)  currentScoreText.text = score.ToString(); 
         if(RecurrentScoreText)   RecurrentScoreText.text = score.ToString();
     }

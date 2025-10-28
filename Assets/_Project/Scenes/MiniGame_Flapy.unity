@@ -3649,6 +3649,8 @@ MonoBehaviour:
   RestartText: {fileID: 935355491}
   currentScoreText: {fileID: 1388214175}
   BestScoreText: {fileID: 1778766208}
+  RecurrentScoreText: {fileID: 1707978686}
+  ReBestScoreText: {fileID: 1738988548}
 --- !u!114 &1175146942
 MonoBehaviour:
   m_ObjectHideFlags: 0

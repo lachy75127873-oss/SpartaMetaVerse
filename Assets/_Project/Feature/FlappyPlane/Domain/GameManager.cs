@@ -60,14 +60,15 @@ namespace _Project.FlappyPlane
         
         public void GameOver()
         {
+            uiManager?.setBestScore(bestScore);
+            uiManager?.setCurrentScore(currentScore);
+            
             if (currentScore > bestScore)
             {
                 bestScore = currentScore;
                 PlayerPrefs.SetInt(BEST_KEY, bestScore);
                 PlayerPrefs.Save();
             }
-            
-            
             
             SetState(GameState.GameOver);
         }

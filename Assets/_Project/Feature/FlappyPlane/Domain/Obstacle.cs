@@ -43,6 +43,7 @@ public class Obstacle : MonoBehaviour
     private void OnTriggerExit2D(Collider2D other)
     {
         Player player = other.GetComponent<Player>();
+        if (player.isDead) return;
         if (player != null) gameManager.AddScore(1);
     }
    

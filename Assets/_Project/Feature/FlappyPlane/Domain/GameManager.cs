@@ -97,8 +97,7 @@ namespace _Project.FlappyPlane
         
         public void Restart()
         {
-            SceneRouter.NextSceneName = "MiniGame_Flapy";
-            SceneManager.LoadScene("LoadingScene");
+            SceneManager.LoadScene("MiniGame_Flapy");
         }
 
         public void ExitGame()

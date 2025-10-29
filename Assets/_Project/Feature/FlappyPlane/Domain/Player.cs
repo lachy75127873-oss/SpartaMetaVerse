@@ -40,8 +40,6 @@ public class Player : MonoBehaviour
         startPosition = transform.position;
         startRotation = transform.rotation;
     }
-
-
     
     void OnEnable()  { GameManager.OnStateChanged += HandleState; }
     void OnDisable() { GameManager.OnStateChanged -= HandleState; }

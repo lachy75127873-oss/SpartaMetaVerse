@@ -29,12 +29,6 @@ public class BgLooper : MonoBehaviour
 
         if (collision.CompareTag("Background"))
         {
-            /* 어떤 Collider2D든 공통으로 있는 AABB bounds 이용
-            float width = collision.GetComponent<SpriteRenderer>().bounds.size.x; // 또는 parent로
-
-            var t = collision.transform;
-            t.position = new Vector3(t.position.x + width * numBgCount, t.position.y, t.position.z);*/
-
             float widthOfBgObject = ((BoxCollider2D)collision).size.x;
             Vector3 pos = collision.transform.position;
 
